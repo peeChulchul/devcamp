@@ -21,10 +21,10 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main className={cn("min-h-screen flex items-center justify-center ")}>
       <AuthContext.Provider value={authState}>
         <UpdateAuthContext.Provider value={updateContext}>
-          <Card className={cn("w-[380px] mx-auto")}>{authState === "signIn" ? <SignIn /> : <Login />}</Card>
+          <Card className={cn("w-[380px]")}>{authState === "signIn" ? <SignIn /> : <Login />}</Card>
         </UpdateAuthContext.Provider>
       </AuthContext.Provider>
     </main>

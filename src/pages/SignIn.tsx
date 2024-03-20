@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "@/components/ui/use-toast";
 
 type TSignInForm = z.infer<typeof signInSchema>;
 
@@ -27,22 +28,26 @@ const SignIn = () => {
   });
 
   const onsubmit = (value: TSignInForm) => {
-    console.log(value);
+    toast({
+      title: "회원가입이 완료되었습니다!",
+      variant: "default",
+      duration: 1000
+    });
   };
 
   return (
     <>
       <CardHeader>
         <CardTitle>회원가입</CardTitle>
-        <CardContent className={cn("p-0")}>
+        <CardContent className={cn("py-4 px-0")}>
           <Form {...signInForm}>
-            <form onSubmit={signInForm.handleSubmit(onsubmit)}>
+            <form className="space-y-3" onSubmit={signInForm.handleSubmit(onsubmit)}>
               <FormField
                 control={signInForm.control}
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>이름</FormLabel>
+                    <FormLabel>이름:</FormLabel>
                     <FormControl>
                       <Input placeholder="홍길동" {...field} />
                     </FormControl>
@@ -55,7 +60,7 @@ const SignIn = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>이메일</FormLabel>
+                    <FormLabel>이메일:</FormLabel>
                     <FormControl>
                       <Input placeholder="test000@gmail.com" {...field} />
                     </FormControl>
@@ -68,7 +73,7 @@ const SignIn = () => {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>연락처</FormLabel>
+                    <FormLabel>연락처:</FormLabel>
                     <FormControl>
                       <Input placeholder="01012345678" {...field} />
                     </FormControl>
@@ -82,7 +87,7 @@ const SignIn = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>비밀번호</FormLabel>
+                    <FormLabel>비밀번호:</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -95,7 +100,7 @@ const SignIn = () => {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>비밀번호 확인</FormLabel>
+                    <FormLabel>비밀번호 확인:</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -108,7 +113,7 @@ const SignIn = () => {
                 name="userRole"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>역할</FormLabel>
+                    <FormLabel>역할:</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -130,32 +135,32 @@ const SignIn = () => {
                 name="userAge"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>연령</FormLabel>
+                    <FormLabel>연령:</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex items-center justify-between"
                       >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem className="flex  space-x-1 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="10" />
                           </FormControl>
                           <FormLabel className="font-normal">10대</FormLabel>
                         </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem className="flex  space-x-1 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="20" />
                           </FormControl>
                           <FormLabel className="font-normal">20대</FormLabel>
                         </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem className="flex space-x-1 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="30" />
                           </FormControl>
                           <FormLabel className="font-normal">30대</FormLabel>
                         </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem className="flex  space-x-1 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="other" />
                           </FormControl>
@@ -168,7 +173,11 @@ const SignIn = () => {
                   </FormItem>
                 )}
               />
-              <Button>회원가입</Button>
+              <div>
+                <Button className={cn("w-full mt-4")} type="submit">
+                  회원가입
+                </Button>
+              </div>
             </form>
           </Form>
         </CardContent>
