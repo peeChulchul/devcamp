@@ -24,9 +24,7 @@ export const signInSchema = z.object({
         message: "연락처는 11자리여야 합니다."
       }
     ),
-  userRole: z.string({
-    required_error: "역할을 선택해주세요."
-  }),
+
   password: z
     .string()
     .min(6, "비밀번호는 최소 6자리 이상이어야 합니다.")
@@ -46,5 +44,11 @@ export const signInSchema = z.object({
         return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(value);
       },
       { message: "비밀번호는 최소 6자리 이상, 영문, 숫자, 특수문자를 포함해야 합니다." }
-    )
+    ),
+  userRole: z.string({
+    required_error: "역할을 선택해주세요."
+  }),
+  userAge: z.string({
+    required_error: "연령을 선택해주세요."
+  })
 });
