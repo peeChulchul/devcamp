@@ -10,10 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useAuthContextUpdate } from ".";
 
 type TLogInForm = z.infer<typeof logInSchema>;
 
 const Login = () => {
+  const onClickSignIn = useAuthContextUpdate();
+
   const logInForm = useForm<TLogInForm>({
     resolver: zodResolver(logInSchema),
     defaultValues: {
@@ -63,12 +66,32 @@ const Login = () => {
                   </FormItem>
                 )}
               />
+              <div className="px-2 flex justify-end">
+                <span
+                  onClick={() => onClickSignIn("signIn")}
+                  className="cursor-pointer text-sm text-muted-foreground font-semibold hover:text-accent-foreground
+                "
+                >
+                  회원가입
+                </span>
+              </div>
 
               <div>
-                <Button className={cn("w-full mt-4")} type="submit">
+                <Button className={cn("w-full ")} type="submit">
                   로그인
                 </Button>
               </div>
+
+              {/* <div className="flex items-center">
+                <hr className="flex-grow border-t-2 border-dashed" />
+                <span className="mx-2 text-sm text-muted-foreground">또는</span>
+                <hr className="flex-grow border-t-2 border-dashed" />
+              </div>
+              <div>
+                <Button className={cn("w-full my-4")} type="submit">
+                  회원가입
+                </Button>
+              </div> */}
             </form>
           </Form>
         </CardContent>
