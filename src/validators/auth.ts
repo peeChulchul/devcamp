@@ -52,3 +52,8 @@ export const signInSchema = z.object({
     required_error: "연령을 선택해주세요."
   })
 });
+
+export const logInSchema = z.object({
+  email: signInSchema.shape.email,
+  password: signInSchema.shape.password
+});
