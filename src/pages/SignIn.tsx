@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { signInSchema } from "@/validators/auth";
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/components/ui/use-toast";
+import { useAuthContextUpdate } from ".";
 
 type TSignInForm = z.infer<typeof signInSchema>;
 
@@ -26,6 +27,8 @@ const SignIn = () => {
       userRole: undefined
     }
   });
+
+  const onClickLogin = useAuthContextUpdate();
 
   const onsubmit = (value: TSignInForm) => {
     toast({
@@ -173,8 +176,19 @@ const SignIn = () => {
                   </FormItem>
                 )}
               />
+
+              <div className="px-2 flex justify-end">
+                <span
+                  onClick={() => onClickLogin("logIn")}
+                  className="cursor-pointer text-sm text-muted-foreground font-semibold hover:text-accent-foreground
+                "
+                >
+                  로그인
+                </span>
+              </div>
+
               <div>
-                <Button className={cn("w-full mt-4")} type="submit">
+                <Button className={cn("w-full")} type="submit">
                   회원가입
                 </Button>
               </div>
